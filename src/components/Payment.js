@@ -139,6 +139,7 @@ export default class Payment extends Component {
         const { name, card, date, cvv, nameError, cardError, dateError, cvvError } = this.state;
         return (
             <div>
+                <form  onSubmit={this.onSubmit}>
                 <div className="container-fluid px-1 px-md-2 px-lg-4 py-5 mx-auto">
                     <div className="row d-flex justify-content-center">
                         <div className="col-xl-7 col-lg-8 col-md-9 col-sm-11">
@@ -179,14 +180,14 @@ export default class Payment extends Component {
                                         <h5 className="mb-5">12345678</h5> <small className="text-sm text-muted">Payment amount</small>
                                         <div className="row px-3 justify-content-sm-center">
                                             <h2 className=""><span className="text-md font-weight-bold mr-2">$</span><span className="text-danger">59.49</span></h2>
-                                        </div> <button type="submit" onClick={this.onSubmit} className="btn btn-red text-center mt-4">PAY</button>
+                                        </div> <button type="submit" className="btn btn-red text-center mt-4">PAY</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                                        </form>
             </div>
         )
     }
