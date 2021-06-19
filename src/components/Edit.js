@@ -3,7 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Form } from 'react-bootstrap';
 import swal from 'sweetalert'
 
-export default class Register extends Component {
+export default class Edit extends Component {
     constructor(props) {
         super(props)
 
@@ -27,6 +27,10 @@ export default class Register extends Component {
 
     }
 
+    componentDidMount() {
+        this.nameInput.focus();
+    }
+
     changeHandler = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -41,40 +45,13 @@ export default class Register extends Component {
         this.setState(this.baseState)
     }
 
-    componentDidMount() {
-        this.nameInput.focus();
-
-        this.documentData = JSON.parse(localStorage.getItem('document'));
-
-        if (localStorage.getItem('document')) {
-            this.setState({
-                firstName: this.documentData.firstName,
-                lastName: this.documentData.lastName,
-                phone: this.documentData.phone,
-                email: this.documentData.email,
-                password: this.documentData.password,
-                gender: this.documentData.gender,
-                dob: this.documentData.dob
-            })
-        } else {
-            this.setState({
-                firstName: '',
-                lastName: '',
-                phone: '',
-                email: '',
-                password: '',
-                gender: '',
-                dob: ''
-            })
-        }
-    }
     SubmitHandler = e => {
         e.preventDefault();
         const isValid = this.validate();
         if (isValid) {
             swal({
                 title: "Done!",
-                text: "Payment Successfully Completed",
+                text: "Successfully Inserted",
                 icon: "success",
                 timer: 2000,
                 button: false
@@ -292,7 +269,7 @@ export default class Register extends Component {
                 <div className="card-header" style={{ backgroundColor: "#DDDDE7", marginTop: "20px", borderRadius: "25px" }}>
                     <form onSubmit={this.SubmitHandler} autoComplete="off">
                         <div className="row justify-content-center">
-                            <h3 className="mb-4">REGISTRATION FORM</h3>
+                            <h3 className="mb-4">PROFILE DETAILS</h3>
                         </div>
                         <div className="form-group row center">
                             <div className="col-md-5 ml-3 mt-2">
@@ -318,21 +295,10 @@ export default class Register extends Component {
                                 <span style={{ color: "#D54442", float: "left" }}>{emailError}</span>
                             </div>
                         </div>
+                    
                         <div className="form-group row center">
                             <div className="col-md-5 ml-3 mt-2">
-                                <label htmlFor="ex2" style={{ float: "left" }}><b>PASSWORD</b> <i className="fa fa-lock"></i> <b><span style={{ color: "#D54442" }} className="required" >*</span></b></label>
-                                <input autoComplete="none" ref={(input) => { this.phoneInput = input; }} className="form-control" value={password} name="password" type="password" placeholder="Password" onChange={this.changeHandler} />
-                                <span style={{ color: "#D54442", float: "left" }}>{passwordError}</span>
-                            </div>
-                            <div className="col-md-5 ml-3 mt-2">
-                                <label htmlFor="ex1" style={{ float: "left" }}><b> CONFIRM PASSWORD</b> <i className="fa fa-lock"></i> <b><span style={{ color: "#D54442" }} className="required" >*</span></b></label>
-                                <input autoComplete="none" className="form-control" value={confirm_password} name="confirm_password" type="password" placeholder="Confirm Password" onChange={this.changeHandler} />
-                                <span style={{ color: "#D54442", float: "left" }}>{confirm_passwordError}</span>
-                            </div>
-                        </div>
-                        <div className="form-group row center">
-                            <div className="col-md-5 ml-3 mt-2">
-                                <label htmlFor="ex3" style={{ float: "left" }}><b>GENDER</b> <i className="fa fa-venus-mars"></i><b><span style={{ color: "#D54442" }} className="required" >*</span></b></label>
+                                <label htmlFor="ex3" style={{ float: "left" }}><b>GENDER</b> <i className="fa fa-id-card"></i></label>
                                 <select id="gender" className="form-control" name="gender" value={gender} onChange={this.changeHandler}>
                                     <option value="">
                                         SELECT GENDER
@@ -345,7 +311,7 @@ export default class Register extends Component {
                             </div>
                             <div className="col-md-5 ml-3 mt-2">
                                 <Form.Group controlId="dob">
-                                    <label htmlFor="ex3" style={{ float: "left" }}><b>DATE OF BIRTH</b> <i className="fa fa-id-card"></i> <b><span style={{ color: "#D54442" }} className="required" >*</span></b></label>
+                                    <label htmlFor="ex3" style={{ float: "left" }}><b>DATE OF BIRTH</b> <i className="fa fa-id-card"></i></label>
                                     <Form.Control type="date" name="dob" value={dob} onChange={this.changeHandler} />
                                 </Form.Group>
                                 <span style={{ color: "#D54442", float: "left" }}>{dobError}</span>
